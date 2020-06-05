@@ -2,25 +2,26 @@ GET http://localhost:3000/
 
 ###
 
-POST http://localhost:3000/student
+POST http://localhost:3000/students
 Content-Type: application/json
 
 {
     "first_name": "Samuel",
-    "last_name": "Greenwald"
+    "last_name": "Greenwald",
+    "course": "5ed9f7b9976cf3cbe1623073"
 }
 
 ###
 
-GET http://localhost:3000/student
+GET http://localhost:3000/students
 
 ###
 
-GET http://localhost:3000/student/5ed8aaa7606e4b97147e78
+GET http://localhost:3000/students/5ed9707417d2d391638b5846
 
 ###
 
-PUT http://localhost:3000/student
+PUT http://localhost:3000/students
 Content-Type: application/json
 
 {
@@ -30,15 +31,26 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/student/5ed8aafb606e4b97147e746a
+DELETE http://localhost:3000/students/5ed9707417d2d391638b5846
 
 ###
 
 
-DELETE http://localhost:3000/student
+DELETE http://localhost:3000/students
 Content-Type: application/json
 
 {
     "condition": "first_name",
     "value": "Samuel"
+}
+
+###
+
+POST http://localhost:3000/courses
+Content-Type: application/json
+
+{
+    "course_name": "Web development bootcamp",
+    "batch": "March 2020",
+    "organization": "WBS"
 }
