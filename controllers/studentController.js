@@ -1,4 +1,5 @@
 const Student = require('../database/models/Student')
+const bcrypt = require('bcrypt')
 
 exports.list_students = (req, res) => {
     Student.find().populate('course')
@@ -13,11 +14,26 @@ exports.find_student = (req, res) => {
     .catch(err => console.error(err))
 }
 
-exports.create_student = (req, res) => {
-    const { first_name, last_name, course } = req.body;
-    Student.create({first_name, last_name, course})
-      .then(data => res.json(data))
-      .catch(err => console.error(err))
+exports.create_student = async (req, res) => {
+    const { first_name, last_name, course, email, password } = req.body;
+
+    let student = await Student.findOne({ email })
+    if (student) return res.status(400).send('This student already exists')
+
+    // Student.create({first_name, last_name, course, email, password })
+    //   .then(data => res.json(data))
+    //   .catch(err => console.error(err))
+
+    student = new Student({ first_name, last_name, course, email, password: await bcrypt.hash(password, 10) })
+
+    await student.save()
+
+    const token = student.createToken()
+
+    res.set('x-authorization-token', token).json({
+      _id: student._id,
+      email: student.email
+    })
     // (async () => {
     //   try {
     //     const newStudent = await Student.create({first_name, last_name})

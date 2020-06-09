@@ -8,12 +8,25 @@ Content-Type: application/json
 {
     "first_name": "Samuel",
     "last_name": "Greenwald",
+    "email": "sam@awesome-startup.com",
+    "password": "ILikeP4p4y4s",
     "course": "5ed9f7b9976cf3cbe1623073"
 }
 
 ###
 
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "sam@awesome-startup.com",
+    "password": "ILikeP4p4y4s"
+}
+
+###
+
 GET http://localhost:3000/students
+Authorization: Bearer 1234567
 
 ###
 
@@ -31,7 +44,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/students/5ed9707417d2d391638b5846
+DELETE http://localhost:3000/students/5edf3cc87b05a43c96185f11
 
 ###
 
